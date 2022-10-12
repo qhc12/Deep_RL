@@ -1,0 +1,22 @@
+# This tree only focuses on fatigue levels
+fatigue
+    0:DN
+    # When fatigue level is 1, just try to move to the highest possible automation level
+    # If no higher level is available, try to Correct the Fatigue
+    1:fatigueL0L2.tree
+    2:fatigueL0L2.tree
+    3:ttdu > 60
+        True:fatigueL0L2.tree
+        False:ttdu < min_esl_time + 2 * timestep
+            True:current_level == 'L4'
+                True:correct_fatigue.tree
+                False:max_available_level
+                     L4:ESL4
+                     L3:ES
+                     L2:ES
+                     L0:ES
+            False:correct_fatigue.tree
+    # When fatigue level is 4, just make an emergency stop if current level is not L4
+    4:current_level == 'L4'
+        True:correct_fatigue.tree
+        False:ES

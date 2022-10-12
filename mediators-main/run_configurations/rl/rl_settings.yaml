@@ -1,0 +1,4 @@
+# obs_space and obs_variables settings need to be the same for training and testing of model
+obs_space: "continuous"  # Can be discrete, continuous, or mixed. Note that when running a trained model, the obs_dict space should be the same as the one used for the trained model.
+obs_variables: "distraction_variables"  # Can be any of the classes defined in gym_simulator/envs/observations/variables (except the abstract class) without the file extension
+reward: "simple_reward"  # Can be any of the classes defined in gym_simulator/envs/reward (except for abstract_reward.py and reward_factory.py). Input as filename of class without extension

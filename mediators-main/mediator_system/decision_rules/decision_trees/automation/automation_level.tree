@@ -1,0 +1,27 @@
+# Tree to move automation levels up or down depending on what is available
+# If the maximum level available is lower than current level,
+# automation needs to shift down
+max_available_level < current_level
+    True:ttdf == 0
+        True:preferred_level <= max_available_level
+            True:enforce_preferred_level.tree
+            False:enforce_max_available_level.tree
+        False:ttau < min_esl_time + timestep
+            True:ES
+            False:PD
+    False:moving_to_level is not None and max_available_level < moving_to_level
+        True:CANCEL
+        # Here an attempt is made to shift to preferred level. Since the driver is already
+        # driving at a lower level, driver fitness does not need to be checked here
+        False:comfortable_switch
+            True:preferred_level <= max_level_long
+                True:preferred_level_declined or current_level == preferred_level
+                    True:DN
+                    False:ttdf == 0 or preferred_level > "L2"
+                        True:suggest_preferred_level.tree
+                        False:DN
+                False:max_level_long
+                    L3:suggest_l3.tree
+                    L2:suggest_l2.tree
+                    L0:DN
+            False:DN

@@ -1,0 +1,62 @@
+# Preferences file with TTDF and TTDU values for different levels of distraction and fatigue
+ttdf:
+  distraction:
+    0: 0
+    1: 0
+    2: 0
+    3: 0
+  fatigue:
+    0: 0
+    1: 0
+    2: 0
+    3: 0
+    4: 2700
+  ndrt:
+    0: 0
+    1: 5
+    2: 10
+    3: 20
+ttdu:
+  distraction:
+    L0:
+      0: |
+        sys.maxsize
+      1: 30
+      2: 15
+      3: 3
+    L2: &distraction_values
+      0: |
+        sys.maxsize
+      1: 45
+      2: 30
+      3: 10
+    L3: *distraction_values
+    L4: *distraction_values
+  fatigue:
+    L0: &fatigue_values
+      0: 10800
+      1: 7200
+      2: 1800
+      3: 900
+      4: 3
+    L2: *fatigue_values
+    L3: *fatigue_values
+    L4: *fatigue_values
+  ndrt:
+    L0: &ndrt_values_l0l2
+      0: |
+        sys.maxsize
+      1: 0
+      2: 0
+      3: 0
+    L2: *ndrt_values_l0l2
+    L3: &ndrt_values_l3l4
+      0: |
+        sys.maxsize
+      1: |
+        sys.maxsize
+      2: |
+        sys.maxsize
+      3: |
+        sys.maxsize
+    L4: *ndrt_values_l3l4

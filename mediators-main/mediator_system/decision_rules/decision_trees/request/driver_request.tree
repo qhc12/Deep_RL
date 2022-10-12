@@ -1,0 +1,21 @@
+active_request
+    True:driver_request == current_level
+        True:CR
+        False:driver_request
+            L0:ttdf == 0
+                True:SSL0
+                False:PD
+            L2:ttdf == 0
+                True:max_available_level >= 'L2' # Possibly change this back to max_level_long
+                    True:SSL2
+                    False:DN
+                False:PD
+            L3:ttdf == 0
+                True:max_available_level >= 'L3'
+                    True:SSL3
+                    False:DN
+                False:PD
+            L4:max_available_level == 'L4'
+                True:SSL4
+                False:DN
+    False:DN

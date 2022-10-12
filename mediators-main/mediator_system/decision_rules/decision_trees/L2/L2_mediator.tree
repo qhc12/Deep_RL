@@ -1,0 +1,5 @@
+distraction > 0
+    True:max_available_level < current_level and ttau < ttdu:
+        True:L2_automation_level.tree
+        False:CD
+    False:L2_automation_level.tree

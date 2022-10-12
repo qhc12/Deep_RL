@@ -1,0 +1,5 @@
+preferred_level
+    L0:ESL0 => time=ttau - timestep
+    L2:ESL2 => time=ttau - timestep
+    L3:ESL3 => time=ttau - timestep
+    L4:ESL4 => time=ttau - timestep

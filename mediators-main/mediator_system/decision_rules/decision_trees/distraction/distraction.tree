@@ -1,0 +1,13 @@
+distraction > 0 # Any level of distraction can be handled the same based on TTDU
+    True:current_level == 'L4' or current_level == 'L3'
+        True:DN
+        False:max_available_level == 'L4' 
+            True:ssl4_declined
+                True:ttdu < min_esl_time + timestep
+                    True:ES
+                    False:CD
+                False:SSL4
+            False:ttdu < min_esl_time + timestep
+                True:ES
+                False:CD
+    False:DN

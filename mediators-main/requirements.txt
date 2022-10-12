@@ -1,0 +1,10 @@
+gym==0.21.0
+matplotlib==3.5.2
+numpy==1.18.4
+pathos==0.2.9
+PyQt5==5.15.7
+PyYAML==6.0
+scipy==1.7.3
+seaborn==0.11.2
+stable_baselines==2.10.2
+stable_baselines3==1.6.0

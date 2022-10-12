@@ -1,0 +1,7 @@
+current_level == 'L2'
+    True:DN
+    False:ssl2_declined
+        True:DN
+        False:ttdf == 0
+            True:SSL2
+            False:DN

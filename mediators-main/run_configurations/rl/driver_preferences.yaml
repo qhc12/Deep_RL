@@ -1,0 +1,9 @@
+preferred_level:  "L4"  # The level that the driver prefers driving in
+comfortable_shift_time: 10.0  # Minimum time (in seconds) which is comfortable for the driver to shift automation levels
+min_esl_time: 3.0  # Minimum ESL time required (but not necessarily comfortable)
+uncomfortable_switch: 120  # Timeframe within which two level changes are deemed uncomfortable
+decline_threshold: 120  # Seconds within which suggestion of the same level after a decline is deemed uncomfortable
+suggested_shift_response_probability: 0.9  # Probability that driver responds to SSL
+# Probability that driver accepts shift to new auto level if he responds. Probabilities are for respective levels L0, L2, L3, and L4
+suggested_shift_acceptance_probability: [0.2, 0.99, 0.8, 0.8]
+window_of_opportunity_time: 0

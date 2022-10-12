@@ -1,0 +1,21 @@
+# Possible views: ROAD, SPEED, ACTIONS, ACTIONS_SINGLE_LINE, FUTURE_ACTIONS, WOO, STATIC_EVENTS, DYNAMIC_EVENTS, TTAF, TTAU,
+#                 DRIVER_EVENTS, DRIVER_STATE, TTDU, TTDF, EVALUATION, DETAILED_EVALUATION, TIME_DRIVEN
+#views: ["ROAD", "SPEED", "ACTIONS", "STATIC_EVENTS", "DYNAMIC_EVENTS", "TTAF", "TTAU",
+#        "DRIVER_STATE", "TTDU", "TTDF", "EVALUATION", "DETAILED_EVALUATION"]
+
+views: ["ROAD", "ACTIONS",
+        "DRIVER_STATE", "TTDU", "TTDF", "EVALUATION", "DETAILED_EVALUATION"]
+#slider: false  # If true, a horizontal slider is used to scroll through the simulation
+#sliding_window: 25  # The length in KM that the sliding window covers
+fit_screen: false  # If true, the plots in the GUI fit the screen (and are not scrollable)
+render_intermediate: false  # If true, intermediate steps will be rendered, showing live simulation
+render_interval: 10  # If render_intermediate is true, every <render_interval> timesteps are shown
+#pause_at_start: 0  # Pause the view for X seconds at the start (only works when rendering intermediate)
+start_from: 0  # Start rendering from a certain position
+show_optimistic_lines: false  # If true, also shows optimistic max levels and corresponding TTAF/U
+show_pessimistic_lines: false  # If true, also shows pessimistic max levels and corresponding TTAF/U
+show_real_ttafu: false  # If true, also shows a line for the actual TTAF/U (calculated in retrospect)
+random_start_in_woo: false  # If true, an action will start at a random time within its window of opportunity
+partial_render: false  # If true, only part of the route will be rendered, from start_position to end_position as defined below
+start_position: 10  # Position to start displaying the route from
+end_position: 20  # Position to end displaying the route

@@ -1,0 +1,5 @@
+max_available_level
+    L0:ESL0 => time=ttau - 2 * timestep
+    L2:ESL2 => time=ttau - 2 * timestep
+    L3:ESL3 => time=ttau - 2 * timestep
+    L4:ESL4 => time=ttau - 2 * timestep

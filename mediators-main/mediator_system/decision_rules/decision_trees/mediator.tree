@@ -1,0 +1,17 @@
+distraction > 0
+    True:max_available_level < current_level
+        True:ttau < ttdu
+            True:automation_level.tree
+            False:distraction.tree
+        False:distraction.tree
+    False:fatigue > 0 and ( ttdu < min_esl_time + 2 * timestep or ( uncorrectable_fatigue is None or not uncorrectable_fatigue ))
+        True:max_available_level < current_level
+            True:ttau <= ttdu
+                True:automation_level.tree
+                False:fatigue.tree
+            False:fatigue.tree
+        False:max_available_level < current_level or ( moving_to_level is not None and max_available_level < moving_to_level )
+            True:automation_level.tree
+            False:active_request
+                True:driver_request.tree
+                False:automation_level.tree

@@ -1,0 +1,3 @@
+uncorrectable_fatigue is not None and uncorrectable_fatigue
+    True:DN
+    False:CF

@@ -1,0 +1,165 @@
+seed: 0 # Seed for RNG
+timestep: 1.0  # Time in seconds that passes in each step
+
+# Car-related settings
+initial_level: "L0"  # Automation level that the simulation starts with
+maximum_automation_level: "L2"  # Maximum automation level allowed in the simulation
+acc_coefficient: 3.5  # The acceleration with which the car accelerates and decelerates in m/s/s
+speed_tolerance: 5  # The maximum speed difference between target speed and the speed the car is driving in km/h
+
+# Driver-related settings
+allowed_driver_events: []  # Options are: FATIGUE, DISTRACTION, NDRT, DRIVER_REQUEST
+# Number of times a particular driver event can occur, corresponding to the index in allowed_driver_events
+max_occurrences_of_driver_event: [3, 4, 1, 1]
+# The probability that a driver event will occur at least once, corresponding to the index in allowed_driver_events
+driver_event_probability: [0.99, 0.2, 0.99, 0.7]
+initial_fatigue: 0  # Initial fatigue level
+initial_distraction: 0  # Initial distraction level
+distraction_increase_prob: 0.005  # Probability that a distraction increases at a timestep
+distraction_ends_midway_prob: 0.02  # Probability at each timestep that a distraction ends when it is not at max level
+distractions_ends_prob: 0.1  # Probability at each timestep that a distraction ends when it is at max level (i.e. 3)
+ndrt_ends_prob: 0.001  # Probability that NDRT ends spontaneously at a timestep
+driver_request_cancel_prob: 0.005  # The probability that the driver ends the request at each timestep
+
+# Road-related settings
+road_length: 30  # Length of randomly generated road in km
+# road_types allows for custom definition of different road types, where each road type has:
+# - min_length: the minimum length in KM of the road type
+# - max_length: the maximum length in KM of the road type
+# - speed_limit: the speed limit in km/h of the road type
+# - max_level: the maximum available automation level of the road type
+# - max_occurrences: the maximum number of times a road type can occur at a road
+road_types:
+  city:
+    min_length: 1
+    max_length: 0.1 * road_length
+    speed_limit: 50.0
+    max_level: L0
+    max_occurrences: 3
+  rural_minor:
+    min_length: 0.1 * road_length
+    max_length: 0.4 * road_length
+    speed_limit: 60.0
+    max_level: L2
+    max_occurrences: 2
+  rural_major:
+    min_length: 0.1 * road_length
+    max_length: 0.4 * road_length
+    speed_limit: 80.0
+    max_level: L2
+    max_occurrences: 2
+  highway_link:
+    min_length: 0.1
+    max_length: 0.5
+    speed_limit: 60.0
+    max_level: L0
+    max_occurrences: 2
+  highway:
+    min_length: 0.5 * road_length
+    max_length: road_length
+    speed_limit: 100.0
+    max_level: L2
+    max_occurrences: 1
+# Defines the road types that are allowed in the simulation, options are the road types defined above
+allowed_road_types: ["city", "rural_minor", "rural_major", "highway_link", "highway"]
+
+# Road events settings
+# static_events allows for custom definition of static events. Each static_event contains:
+# - default_level: the maximum available automation level which is available during the event
+# - default_speed: the speed in km/h the car can drive during the event
+# - min_length: the minimum length (in km) of the event
+# - max_length: the maximum length (in km) of the event
+# - probability: the probability that the event occurs at least once during a drive
+static_events:
+  Turn:
+    default_level: "L0"
+    default_speed: 30
+    min_length: 0.1
+    max_length: 0.3
+    probability: 0.9
+  Curvature:
+    default_level: "L0"
+    default_speed: 30
+    min_length: 0.1
+    max_length: 0.8
+    probability: 0.9
+  Roundabout:
+    default_level: "L0"
+    default_speed: 20
+    min_length: 0.1
+    max_length: 0.2
+    probability: 0.9
+  PoorLaneMarking:
+    default_level: "L0"
+    default_speed: 100
+    min_length: 0.1
+    max_length: 2.0
+    probability: 0.9
+  ODD:
+    default_level: "L2"
+    default_speed: 100
+    min_length: 0.1
+    max_length: 0.5
+    probability: 0.9
+# Defines the static events that are allowed in the simulation, options are the events defined above
+allowed_static_events: ["Turn", "Curvature", "Roundabout", "PoorLaneMarking", "ODD"]
+
+# dynamic_events allows for custom definition of dynamic events. Each dynamic_event contains:
+# - default_level: the maximum available automation level which is available during the event
+# - default_speed: the speed in km/h the car can drive during the event
+# - min_length: the minimum length (in km) of the event
+# - max_length: the maximum length (in km) of the event
+# - probability: the probability that the event occurs at least once during a drive
+# - max_occurrences: the maximum number of times an event can occur during a drive
+dynamic_events:
+  Road Works:
+    default_level: "L0"
+    default_speed: 40
+    min_length: 0.1
+    max_length: 0.5
+    probability: 0.5
+    max_occurrences: 1
+  Weather:
+    default_level: "L0"
+    default_speed: 100
+    min_length: 2
+    max_length: 10
+    probability: 0.2
+    max_occurrences: 1
+  Traffic:
+    default_level: "L0"
+    default_speed: 25
+    min_length: 1
+    max_length: 5
+    probability: 0.3
+    max_occurrences: 1
+  Other:
+    default_level: "L0"
+    default_speed: 100
+    min_length: 0.2
+    max_length: 0.6
+    probability: 0.5
+    max_occurrences: 1
+# Defines the dynamic events that are allowed in the simulation, options are the events defined above
+allowed_dynamic_events: []
+dynamic_event_min_lookahead: 0.0  # Defines minimum distance (in KM) before which dynamic event is detected ahead
+dynamic_event_max_lookahead: 1.0  # Defines maximum distance (in KM) before which dynamic event ahead is detected
+
+# Action-related settings
+# Available actions are: DN, CANCEL, SSL0, SSL2, SSL3, SSL4, ESL0, ESL2, ESL3, ESL4, CF, CD, PD, CR, ES
+available_actions: ['DN', 'CANCEL', 'SSL0', 'SSL2', 'ESL0']
+instant_actions: false  # When set to true, every action terminates instantly (in the same timestep)
+ss_resp_prob_dr: 0.999  # Probability that a driver responds when he requested that level
+ss_acc_prob_dr: 0.999  # Probability that a driver accepts when he requested that level
+max_correct_fatigue_time: 10  # The time for which the correct fatigue action runs
+cf_success_probability: 0.5  # The probability that correcting fatigue is successful
+max_cd_time: 10  # The time for which correct distraction runs
+cd_success_probability: 0.95  # The probability that correcting distraction is successful
+pd_success_probability: 0.95  # The probability that preparing the driver is successful
+use_parsed_tta_for_actions: false  # If true, the parsed route data is also used as a basis for actions
+
+# Evaluation settings
+# Sets the metrics that will be evaluated. The names correspond directly with the classnames of the events, defined in
+# several directories in gym_simulator/evaluations
+# Current options: CarUnfit, DriverUnfit, QuickTakeover, DoubleSuggestion, RecentSwitch, UnnecessaryES, PendingRequest
+evaluation_metrics: [CarUnfit, DriverUnfit, QuickTakeover, DoubleSuggestion, RecentSwitch, UnnecessaryES, PendingRequest]

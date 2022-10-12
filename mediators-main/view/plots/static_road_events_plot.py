@@ -1,0 +1,16 @@
+from view.plots.abstract_road_events_plot import AbstractRoadEventsPlot
+
+
+class StaticRoadEventsPlot(AbstractRoadEventsPlot):
+
+    def __init__(self, config, data, cp):
+        super().__init__(config, data, cp)
+
+    def init_plot(self, ax):
+        self.init_road_events_labels(ax, self.config.allowed_static_events, "Static\nevents")
+        event_intervals = self.get_event_intervals(self.data.road_events["static"])
+        self.init_road_events_lines(ax, event_intervals, self.cp[3])
+
+    def update_plot(self):
+        event_intervals = self.get_event_intervals(self.data.road_events["static"])
+        self.update_road_lines(event_intervals)

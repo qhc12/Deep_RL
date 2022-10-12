@@ -1,0 +1,13 @@
+# Tree to move automation levels up or down depending on what is available
+max_available_level < current_level
+    # time indicates the time available for ESL0, last indication the latest position at which it can be initiated comfortably
+    True:ESL0 => time=ttau - 2 * timestep,last=latest_esl_position
+    False:moving_to_level is not None and max_available_level < moving_to_level
+        True:CANCEL
+        # Here an attempt is made to shift to preferred level
+        False:comfortable_switch and ( preferred_level <= max_level_long and not ( preferred_level_declined or current_level == preferred_level ) )
+#        False:preferred_level <= max_level_long and not ( preferred_level_declined or current_level == preferred_level )
+            True:preferred_level
+                L0:SSL0 => last=road_length
+                L2:SSL2 => last=latest_max_level_long_position
+            False:DN
